@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Procure por um personagem</title>
+    <link rel="stylesheet" href="styles/main-style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="search-input-container">
+            <input type="text" name="search-input" id="search-input" placeholder="Pesquise um personagem">
+            <button id="btn-buscar">buscar</button>
+            <p id="input-error-value" class="error-busca">Digite um nome para a busca</p>
+        </div>
+
+        <div id="cards-container" class="cards-container">
+
+        </div>
+
+        <div class="cards-container-2" id="#cards-container-2">
+            <div class="hidden" id="erro-busca">
+                <strong>Não foi possível encontrar por:</strong><br>
+                <p id="query-error-value"></p>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
