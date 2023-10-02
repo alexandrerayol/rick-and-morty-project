@@ -17,7 +17,6 @@ const endPoints = {
 
 let inputValue;
 let query;
-let characters;
 
 btnBuscar.addEventListener('click', () => {
     getValue();
@@ -25,7 +24,6 @@ btnBuscar.addEventListener('click', () => {
         resetDisplay()
         setQuery()
         getResponse()
-        resetDisplay()
     }
 })
 
@@ -70,7 +68,6 @@ function getResponse(){
     .then( (response) => {
         setQueryError(false);
         for(let i of response.results){
-            i.name;
             displayCharacters(i)
         }
         
