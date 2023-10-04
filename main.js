@@ -3,9 +3,6 @@ function getCharacter(){
 const searchInput = document.querySelector('#search-input');
 const btnBuscar = document.querySelector('#btn-buscar');
 const cardsContainer = document.querySelector('#cards-container');
-const cardsContainer2 = document.querySelectorAll('#cards-container-2');
-const erroBusca = document.querySelector('#erro-busca'); 
-const queryErrorValue = document.querySelector('#query-error-value');
 const inputErrorValue = document.querySelector('#input-error-value');
 
 
@@ -23,7 +20,10 @@ btnBuscar.addEventListener('click', () => {
     if(getValue()){
         resetDisplay()
         setQuery()
-        getResponse()
+        getResponse().catch(erro => {
+            console.log('erro ao realizar requisição ' + erro)
+            setQueryError(true);
+        })
     }
 })
 
@@ -58,41 +58,29 @@ function setQuery(){
     query = '/?name=' + valueFormated;
 }
 
-function getResponse(){
-    const response = fetch(`${endPoints.characters}${query}`, {
-        method: 'GET'
-    })
-    .then( (response) => {
-        return response.json();
-    })
-    .then( (response) => {
-        setQueryError(false);
-        for(let i of response.results){
-            displayCharacters(i)
-        }
-        
-    }).catch( (error) => {
-        console.log('erro ao realizar requisição')
-        setQueryError(true)
-        
-
-    } )
-}
-
 function setQueryError(boolean){
     if(boolean){
-        erroBusca.style.display = 'block';
-        queryErrorValue.innerText = `"${inputValue}"`; 
-        cardsContainer2.classList.add('posDisplay');
+    const elementComplete = `<div class="h1-text"><h1>Não foi possível encontrar por "${inputValue.toLowerCase()}"</h1></div>`;
+    cardsContainer.innerHTML = elementComplete;
+    cardsContainer.classList.add('shadow');
     }else{
-        erroBusca.style.display = 'none';
-        queryErrorValue.innerText = ``;
+        cardsContainer.innerHTML = '';
+        cardsContainer.classList.remove('shadow')
     }
 }
 
+async function getResponse(){
+    const response = await fetch(`${endPoints.characters}${query}`, {
+        method: 'GET'
+    })
+    const responseConverted = await response.json();
+    for(let i of responseConverted.results){
+        displayCharacters(i)
+    }
+}
 
 function displayCharacters(response){
-    cardsContainer.classList.add('posDisplay');
+    cardsContainer.classList.add('shadow');
     const character = {
         nome: response.name,
         image: response.image,
@@ -105,14 +93,8 @@ function displayCharacters(response){
 
 function resetDisplay(){
     cardsContainer.innerHTML = '';
-    cardsContainer.classList.remove('posDisplay');
-    setQueryError(false);
+    cardsContainer.classList.remove('shadow', 'intro-card', 'h1-text');
 }
-
-
-
-
-
 
 }
 

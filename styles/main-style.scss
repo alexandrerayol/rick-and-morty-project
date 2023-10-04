@@ -25,6 +25,7 @@ input,button{
     align-items: center;
     justify-content: center;
     border-radius: 16px;
+    padding: 0px 24px;
 }
 
 .search-input-container{
@@ -56,7 +57,7 @@ input,button{
     background-position: center center;
     background-repeat: no-repeat;
     border-radius: 16px;
-    
+    margin: 0px 8px;
 }
 
 .card{
@@ -93,7 +94,7 @@ input,button{
     color: red;
 }
 
-.posDisplay{
+.shadow{
     box-shadow: 1px 1px 16px 1px black;
 }
 
@@ -120,17 +121,27 @@ input,button{
     padding: 3px;
 }
 
-.cards-container-2{
-    width: 100%;
-    height: 100%;
-    display: flex;
+.intro-card{
+
+    flex-wrap: nowrap;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
-    gap: 16px;
-    background-image: url('https://wallpapercave.com/wp/wp3277659.jpg');
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
+    padding: 24px 0px;
+
+}
+
+.h1-text{
+    background-color: white;
+    padding: 12px 6px;
     border-radius: 16px;
+    box-shadow: 1px 1px 16px 1px black;
+    margin: 12px 0px;
+    font-size: .8em;
+}
+
+@media screen and (max-width: 640px){
+    .h1-text{
+        font-size: .6em;
+    }
 }
